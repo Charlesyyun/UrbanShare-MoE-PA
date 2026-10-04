@@ -21,12 +21,13 @@ if str(SEIR_ROOT) not in sys.path:
 from seir_timeseries import SEIRTimeseries, _load_feature_meta
 
 ROOT = REPO_ROOT
-DEFAULT_DAILY_SHARES = REPO_ROOT / "data" / "behavior" / "observed.csv.gz"
-DEFAULT_FEATURE_META = REPO_ROOT / "data" / "behavior" / "feature_meta.json"
+# All defaults refer to user-supplied files in the current working directory.
+DEFAULT_DAILY_SHARES = Path("daily_shares.csv")
+DEFAULT_FEATURE_META = Path("feature_meta.json")
 # The official curve is a user-supplied external input, not a repository file.
 OFFICIAL_CURVE_HTML = Path("official_curve.html")
-DEFAULT_BASE_HAZARD = REPO_ROOT / "dataset" / "MetaData" / "hazard_params.json"
-DEFAULT_OUT_DIR = SEIR_ROOT / "results" / "calibration_runs" / "latest"
+DEFAULT_BASE_HAZARD = Path("hazard_params.json")
+DEFAULT_OUT_DIR = Path("seir_calibration_output")
 DEFAULT_SEED_LIST = DEFAULT_OUT_DIR / "seed_agents.csv"
 DEFAULT_SCRATCH_DIR = DEFAULT_OUT_DIR / "_scratch"
 

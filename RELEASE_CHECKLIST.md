@@ -1,25 +1,13 @@
-# Public-release checklist
+# Code-only release checklist
 
-The code and compact experiment artifacts have been separated from the full
-working directory. Before publishing, the repository owner should still:
+Before adding local inputs or using the code for a paper reproduction:
 
-- add the final paper title, authors, citation/BibTeX, and contact information;
-- choose and add a software license, and separately confirm whether the derived
-  trajectory files may be redistributed under that license;
-- run `python tools/validate_release.py` after any last edit;
-- inspect `git status` and the first commit before pushing;
-- enable GitHub secret scanning and avoid committing any subsequently generated
-  raw data, checkpoints, logs, or full scenario-run directories.
+- verify that all behavior data, epidemic curves, calendars, parameters, checkpoints, and generated outputs stay outside Git;
+- provide the final paper citation and contact information if this repository is cited;
+- install Python 3.10 or newer dependencies from `requirements.txt`;
+- run `python -m compileall -q .` and `python tools/validate_release.py`;
+- inspect `git status` before every commit;
+- enable GitHub secret scanning and do not attach restricted data to public issues.
 
-Suggested local initialization (run only after the points above are resolved):
+The repository intentionally publishes source code only. Numerical reproduction requires authorized local inputs described in `DATA.md`.
 
-```bash
-cd Github_code
-git init
-git add .
-git status
-git commit -m "Initial reproducibility release"
-```
-
-No remote repository is created and nothing is pushed by the preparation
-process.
