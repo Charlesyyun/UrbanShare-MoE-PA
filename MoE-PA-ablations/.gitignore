@@ -1,9 +1,0 @@
-**/__pycache__/
-**/*.pyc
-**/*.pt
-**/dataset/
-**/run.log
-**/predictions.csv
-**/per_agent_daily_*.csv
-**/per_agent_*.csv
-**/gpu*/

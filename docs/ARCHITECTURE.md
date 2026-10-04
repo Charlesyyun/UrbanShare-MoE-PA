@@ -32,11 +32,11 @@ preference, behavior-cloning, anchoring, phase-response, sparsity, and optional
 one-step rollout objectives. Factual and counterfactual profiles expose different
 conservative/alignment presets.
 
-## Counterfactual rollout
+## Behavioral-to-SEIR interface
 
-`counterfactual_pipeline.py` loads a dense, MoE, or PA checkpoint, replaces the
-factual policy calendar, and updates lag features sequentially. Every variant
-emits the same daily-share schema consumed by SEIR.
+The behavioral modules emit a daily-share schema consumed by SEIR. The private
+checkpoints and agent-day inputs used to produce those shares are not included
+in this public release.
 
 ## Activity-aware SEIR
 

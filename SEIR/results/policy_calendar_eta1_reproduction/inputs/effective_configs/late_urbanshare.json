@@ -1,7 +1,7 @@
 {
-  "daily_shares": "E:\\Study\\DSO\\DSO-MoE-PA\\late\\Results\\out\\OLD\\911\\cf2_origin\\phase_shift_dynamic_mgpu\\daily_shares_cf.csv",
-  "hazard_params_source": "E:\\Study\\DSO\\DSO-MoE-PA\\early\\Results\\out\\911\\seir_autocalibration_constantimport_monobeta_v2\\hazard_params_auto_calibrated.json",
-  "feature_meta": "E:\\Study\\DSO\\DSO-MoE-PA\\late\\Results\\runs\\enriched_911_retry2\\feature_meta.json",
+  "daily_shares": "PRIVATE_INPUT_REQUIRED",
+  "hazard_params_source": "PRIVATE_INPUT_REQUIRED",
+  "feature_meta": "PRIVATE_INPUT_REQUIRED",
   "latent_days": 3,
   "infectious_days": 7,
   "seed_pct": 0.002,
@@ -26,7 +26,7 @@
   "date_importation_schedule_csv": "",
   "date_external_seed_schedule_csv": "",
   "crowding_eta": 1.0,
-  "crowding_reference_daily_shares": "E:\\Study\\DSO\\DSO-MoE-PA\\early\\Results\\runs\\enriched_911_retry2\\daily_shares.csv",
+  "crowding_reference_daily_shares": "PRIVATE_INPUT_REQUIRED",
   "crowding_min": 0.25,
   "crowding_max": 4.0,
   "hazard_params_effective": {

@@ -14,11 +14,10 @@ TEXT_EXTENSIONS = {".py", ".md", ".txt", ".json", ".csv", ".tex", ".sh", ".yml",
 REQUIRED = (
     "README.md", "DATA.md", "LICENSE", "CONTRIBUTING.md",
     "docs/ARCHITECTURE.md", "docs/WORKFLOW.md", "docs/PAPER_ALIGNMENT.md",
-    "daily_share_model.py", "daily_share_model_baseline.py",
-    "preference_dataset.py", "preference_alignment_finetune.py",
-    "counterfactual_pipeline.py", "SEIR/seir_timeseries.py",
-    "SEIR/analysis/run_counterfactual_scenarios.py",
-    "SEIR/results/hazard_params_recalibrated_2026.json",
+    "daily_share_model.py",
+    "preference_dataset.py", "preference_alignment_finetune.py", "SEIR/seir_timeseries.py",
+    "SEIR/analysis/plot_figure12_10seed.py",
+    "SEIR/results/policy_calendar_eta1_reproduction/provenance/calibration/best_effective_hazard_params.json",
     "SEIR/results/policy_calendar_eta1_reproduction/random_seed_table9/table9_10_seed_summary.csv",
     "SEIR/figures/fig15_seir_policy_compare_four_calendars_10seed.png",
 )
@@ -116,5 +115,6 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
 
 

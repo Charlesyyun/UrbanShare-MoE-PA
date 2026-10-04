@@ -6,7 +6,7 @@ This public tree is aligned to the 2026 TRA manuscript (`2026_TRA_MoE_PA.pdf`) a
 
 ## Model and policy mapping
 
-- `daily_share_model.py`, `preference_alignment_finetune.py`, and `counterfactual_pipeline.py` implement the UrbanShare-MoE-PA behavioral pipeline and its policy-calendar rollout interface.
+- `daily_share_model.py`, `preference_alignment_finetune.py`, and implement the UrbanShare-MoE-PA behavioral pipeline and its policy-calendar rollout interface.
 - `SEIR/seir_timeseries.py` is the activity-aware SEIR engine.
 - `early`, `late`, `short`, and `long` retain the paper's calendar definitions. Their individual behavior files are intentionally omitted from the public release.
 - The paper-aligned ten-seed aggregate is in `SEIR/results/policy_calendar_eta1_reproduction/random_seed_table9/`.
@@ -22,3 +22,4 @@ The observed reference value used for calibration is conceptually separate from 
 ## Reproducibility limits
 
 A user with the restricted daily-share inputs, the calibrated parameters, and compatible software can use the supplied scripts to regenerate the stochastic runs. A user with this public repository alone can audit code structure, calendars, parameter files, aggregate outputs, and figure artifacts, but cannot retrain the behavioral model or independently regenerate agent-level rollouts.
+

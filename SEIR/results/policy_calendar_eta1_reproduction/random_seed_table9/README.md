@@ -29,7 +29,7 @@ calendar daily-share CSVs and the crowding-reference daily-share CSV, then run:
 
 ```powershell
 python SEIR/results/policy_calendar_eta1_reproduction/run_10_seed_table9.py `
-  --rerun --daily-shares-manifest C:\path\to\local_manifest.json
+  --rerun --daily-shares-manifest PRIVATE_INPUT_REQUIRED
 ```
 
 The manifest schema is:
@@ -50,3 +50,4 @@ The manifest schema is:
 Those agent-day inputs remain external to this public repository. The
 calibrated parameter file, model metadata, seed list, economic components,
 archived simulation results, and compact figure reference curves are included.
+
