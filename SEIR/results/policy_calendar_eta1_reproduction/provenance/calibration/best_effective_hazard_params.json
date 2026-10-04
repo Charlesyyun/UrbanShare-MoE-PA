@@ -1,0 +1,131 @@
+{
+  "daily_shares": "E:\\Study\\DSO\\DSO-MoE-PA\\early\\Results\\runs\\enriched_911_retry2\\daily_shares.csv",
+  "feature_meta": "E:\\Study\\DSO\\DSO-MoE-PA\\early\\Results\\runs\\enriched_911_retry2\\feature_meta.json",
+  "hazard_params_source": "E:\\Study\\DSO\\DSO-MoE-PA\\early\\Results\\out\\911\\seir_autocalibration_constantimport_monobeta_v2\\hazard_params_auto_calibrated.json",
+  "base_hazard": "E:\\Study\\DSO\\DSO-MoE-PA\\early\\dataset\\MetaData\\hazard_params_trend_calibrated_v1.json",
+  "official_curve_html": "E:\\Study\\DSO\\DSO-MoE-PA\\early\\tmp_sg_covid_2020.html",
+  "seed_list": "E:\\Study\\DSO\\DSO-MoE-PA\\early\\dataset\\MetaData\\seir_seed_list_911_trend_v1.csv",
+  "latent_days": 3,
+  "infectious_days": 7,
+  "seed_pct": 0.002,
+  "sim_seed": 1234,
+  "rng_seed": 1234,
+  "workers": 1,
+  "mixing_scale": "24h",
+  "beta_scale": 1.8055325359443612,
+  "home_beta_alpha": 0.211730151512386,
+  "importation_prob": 2.6474672636336814e-05,
+  "phase_beta_mult": {
+    "0": 0.8676718370063505,
+    "1": 0.8232900615693003,
+    "2": 0.8232900615693003,
+    "3": 0.8232900615693003
+  },
+  "phase_importation_mult": {
+    "0": 1.0,
+    "1": 1.0,
+    "2": 1.0,
+    "3": 1.0
+  },
+  "importation_mode": "constant",
+  "date_importation_schedule": "",
+  "search_seed": 20260711,
+  "search_trials": 180,
+  "refine_trials": 96,
+  "refine_sigma": 0.12,
+  "best_candidate": {
+    "name": "local_0073",
+    "beta_scale": 1.8055325359443612,
+    "home_beta_alpha": 0.211730151512386,
+    "importation_prob": 2.6474672636336814e-05,
+    "phase_beta_mult": {
+      "0": 0.8676718370063505,
+      "1": 0.8232900615693003,
+      "2": 0.8232900615693003,
+      "3": 0.8232900615693003
+    },
+    "phase_importation_mult": {
+      "0": 1.0,
+      "1": 1.0,
+      "2": 1.0,
+      "3": 1.0
+    }
+  },
+  "best_metrics": {
+    "incidence_corr": 0.592691753905306,
+    "incidence_nrmse": 0.30516724706952975,
+    "peak_date_error_days": 1,
+    "phase_share_mae": 0.19019672421874012,
+    "cumulative_corr": 0.7014121369712178,
+    "cumulative_nrmse": 0.41834445765852074
+  },
+  "hazard_params_effective": {
+    "beta_base": 0.7222130143777445,
+    "cat_mult": [
+      0.87,
+      1.13,
+      0.0,
+      0.95,
+      1.3,
+      0.95,
+      1.13,
+      0.95,
+      1.0,
+      1.39,
+      1.04,
+      0.0
+    ],
+    "contact_rate_cat": [
+      1.8,
+      2.4,
+      0.0,
+      1.8,
+      2.2,
+      2.4,
+      1.9,
+      2.6,
+      3.0,
+      1.7,
+      1.4,
+      0.0
+    ],
+    "mode_mult": [
+      0.0,
+      0.0,
+      0.0,
+      1.8,
+      1.4,
+      0.0
+    ],
+    "gender_mult": {
+      "M": 1.0,
+      "F": 1.0,
+      "U": 1.0
+    },
+    "age_mult": [
+      0.9,
+      1.0,
+      1.1,
+      1.2,
+      1.3
+    ],
+    "importation_prob": 2.6474672636336814e-05,
+    "phase_beta_mult": {
+      "0": 1.1,
+      "1": 0.4,
+      "2": 0.65,
+      "3": 0.78
+    },
+    "phase_importation_mult": {
+      "0": 1.0,
+      "1": 4.5,
+      "2": 0.8,
+      "3": 2.0
+    },
+    "phase_cat_mult": {
+      "1": {
+        "4": 0.0
+      }
+    }
+  }
+}

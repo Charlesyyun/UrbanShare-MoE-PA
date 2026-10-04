@@ -1,0 +1,11 @@
+run_id,display_name,status,notes
+REF_BASE,UrbanShare,complete_via_REF_MOE_PA,"Standalone REF_BASE log failed because the model path was empty; complete dense-baseline outputs are stored under REF_MOE_PA/preferences_origin and cf2_origin."
+REF_MOE_PA,UrbanShare-MoE-PA,complete,"Contains UrbanShare, supervised UrbanShare-MoE, and aligned UrbanShare-MoE-PA reference outputs."
+A1_no_lag_gate,w/o Lag Gate,complete,"Final aligned, counterfactual, and SEIR outputs found."
+A2_no_film,w/o FiLM,complete,"Final aligned, counterfactual, and SEIR outputs found."
+A3_no_lps,w/o L_ps,complete,"Final aligned, counterfactual, and SEIR outputs found."
+A4_moe_only,MoE only + PA,complete,"MoE-only supervised backbone followed by PA."
+B1_no_cf_aug,w/o CF augmentation,complete,"Final aligned, counterfactual, and SEIR outputs found."
+B2_no_adaptive_margin,w/o adaptive margin,complete,"Final aligned, counterfactual, and SEIR outputs found."
+B3_no_phase_resp,w/o policy-phase ranking,complete_with_naming_caveat,"Only policy-phase ranking is disabled; this is not a full phase-response removal."
+B4_no_omega,w/o omega weighting,missing,"No experiment directory or completed output found."

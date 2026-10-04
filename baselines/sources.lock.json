@@ -1,0 +1,18 @@
+{
+  "tabm": {
+    "url": "https://github.com/yandex-research/tabm.git",
+    "commit": "28e47ae301c92ec37787dde1ce923a0793f405b4"
+  },
+  "TimeXer": {
+    "url": "https://github.com/thuml/TimeXer.git",
+    "commit": "76011909357972bd55a27adba2e1be994d81b327"
+  },
+  "rmdcev": {
+    "url": "https://github.com/plloydsmith/rmdcev.git",
+    "commit": "8b0f1119e2d3f5fd1353f1c01b67c28a33184d4f"
+  },
+  "catboost": {
+    "url": "https://github.com/catboost/catboost.git",
+    "commit": "f5c0c80ad79fc40f0e6dd94b3140b08afe0a6f4a"
+  }
+}

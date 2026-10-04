@@ -1,0 +1,24 @@
+{
+  "POIS": {
+    "community and government": 0,
+    "arts and entertainment": 1,
+    "landmarks and outdoors": 2,
+    "travel and transportation": 3,
+    "dining and drinking": 4,
+    "business and professional services": 5,
+    "sports and recreation": 6,
+    "retail": 7,
+    "health and medicine": 8,
+    "event": 9,
+    "education": 10,
+    "home": 11
+  },
+  "MODES": {
+    "walk": 0,
+    "cycle": 1,
+    "car": 2,
+    "mrt": 3,
+    "bus": 4,
+    "unknown": 5
+  }
+}

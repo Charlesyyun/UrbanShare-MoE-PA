@@ -1,0 +1,14 @@
+[project]
+name = "dso-moe-pa"
+version = "0.1.0"
+description = "Policy-aware behavior modeling and epidemic simulation"
+requires-python = ">=3.10"
+dynamic = ["dependencies"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+exclude = ["SEIR/results", "SEIR/figures"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

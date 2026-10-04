@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.venv/
+venv/
+
+# Private or generated model artifacts
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.bin
+
+# Agent-level and raw behavior inputs (never publish)
+*.csv.gz
+data/behavior/*.csv
+data/behavior/*.parquet
+*/behavior/*.csv
+*/behavior/*.parquet
+
+# Generated SEIR runs and local manifests
+SEIR/results/scenarios/
+SEIR/results/**/runs/
+**/*private*
+**/*secret*
+
+# Local tooling
+.DS_Store
+Thumbs.db

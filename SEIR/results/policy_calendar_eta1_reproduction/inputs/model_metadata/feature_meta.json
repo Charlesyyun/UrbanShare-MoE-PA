@@ -1,0 +1,48 @@
+{
+  "poi_name_to_idx": {
+    "community and government": 0,
+    "arts and entertainment": 1,
+    "landmarks and outdoors": 2,
+    "travel and transportation": 3,
+    "dining and drinking": 4,
+    "business and professional services": 5,
+    "sports and recreation": 6,
+    "retail": 7,
+    "health and medicine": 8,
+    "event": 9,
+    "education": 10,
+    "home": 11
+  },
+  "mode_name_to_idx": {
+    "walk": 0,
+    "cycle": 1,
+    "car": 2,
+    "mrt": 3,
+    "bus": 4,
+    "unknown": 5
+  },
+  "cat_ids": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "mode_ids": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "home_cat_idx": 11,
+  "unknown_mode_idx": 5
+}

@@ -1,0 +1,66 @@
+{
+  "calibration_date": "2026-08-24",
+  "description": "SEIR model parameters calibrated with official_curve_seed mode (2026-08-24)",
+  "calibration_method": "auto_calibrate_seir.py with official_curve_seed importation mode",
+  "source_directory": "SEIR/results",
+  "fixed_parameters": {
+    "beta_scale": 1.050217280376457,
+    "home_beta_alpha": 0.011184027474065918,
+    "importation_prob": 0.0,
+    "external_seed_prob": 1.154536188301418e-05,
+    "latent_days": 3,
+    "infectious_days": 7,
+    "seed_pct": 0.002,
+    "rng_seed": 1234,
+    "mixing_scale": "24h",
+    "home_protection_scope": "population",
+    "importation_mode": "official_curve_seed",
+    "official_import_signal": "official_active_cases_7dma"
+  },
+  "phase_parameters": {
+    "phase_beta_mult": {
+      "0": 0.9700427905235176,
+      "1": 0.7520988786963764,
+      "2": 0.7750030137408843,
+      "3": 0.7750030137408843
+    },
+    "phase_importation_mult": {
+      "0": 1.0,
+      "1": 1.0,
+      "2": 1.0,
+      "3": 1.0
+    },
+    "phase_cat_mult": {
+      "1": {
+        "4": 0.0
+      }
+    }
+  },
+  "calibration_quality": {
+    "incidence_corr": 0.5293,
+    "cumulative_corr": 0.9307,
+    "active_corr": -0.3971,
+    "incidence_nrmse": 0.2421,
+    "peak_date_error_days": 1,
+    "active_peak_date_error_days": 29,
+    "phase_share_mae": 0.0777,
+    "external_seed_share": 0.0
+  },
+  "interpretation": {
+    "phase_beta_mult": {
+      "phase_0": "Pre-NPI: 97% of baseline transmission",
+      "phase_1": "Lockdown: 75% of baseline (25% reduction)",
+      "phase_2": "Phase 1 reopening: 78% of baseline",
+      "phase_3": "Phase 2 reopening: 78% of baseline"
+    },
+    "comparison_with_previous": {
+      "note": "Compare with early/dataset/MetaData/hazard_params_trend_calibrated_v1.json",
+      "previous_phase_beta_mult": {
+        "0": 1.1,
+        "1": 0.4,
+        "2": 0.65,
+        "3": 0.78
+      }
+    }
+  }
+}

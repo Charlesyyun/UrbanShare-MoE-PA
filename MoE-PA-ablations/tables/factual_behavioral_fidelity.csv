@@ -1,0 +1,29 @@
+panel,output,model,run_id,MAE_h_day,RMSE_h_day,Abs_Bias_h_day,Corr
+held_out,POI categories,UrbanShare,REF_BASE,0.101388,0.121777,0.088520,0.814873
+held_out,POI categories,UrbanShare-MoE,REF_MOE_PA_supervised,0.049447,0.066604,0.029393,0.899048
+held_out,POI categories,UrbanShare-MoE-PA,REF_MOE_PA,0.061438,0.078363,0.049599,0.913232
+held_out,POI categories,w/o Lag Gate,A1_no_lag_gate,0.101052,0.116291,0.093448,0.895345
+held_out,POI categories,w/o FiLM,A2_no_film,0.071081,0.084145,0.055409,0.883615
+held_out,POI categories,w/o L_ps,A3_no_lps,0.091634,0.105651,0.079448,0.890080
+held_out,POI categories,MoE only + PA,A4_moe_only,0.060095,0.074707,0.041520,0.883971
+held_out,Travel modes,UrbanShare,REF_BASE,0.021531,0.023619,0.021062,0.932584
+held_out,Travel modes,UrbanShare-MoE,REF_MOE_PA_supervised,0.012955,0.014932,0.009694,0.913867
+held_out,Travel modes,UrbanShare-MoE-PA,REF_MOE_PA,0.011250,0.014200,0.006003,0.921387
+held_out,Travel modes,w/o Lag Gate,A1_no_lag_gate,0.011776,0.014235,0.007399,0.913536
+held_out,Travel modes,w/o FiLM,A2_no_film,0.011495,0.014855,0.006741,0.893265
+held_out,Travel modes,w/o L_ps,A3_no_lps,0.010883,0.013952,0.006692,0.928416
+held_out,Travel modes,MoE only + PA,A4_moe_only,0.020816,0.026070,0.016507,0.797615
+full_184_days,POI categories,UrbanShare,REF_BASE,0.091256,0.108721,0.082327,0.912391
+full_184_days,POI categories,UrbanShare-MoE,REF_MOE_PA_supervised,0.033484,0.045169,0.016239,0.957308
+full_184_days,POI categories,UrbanShare-MoE-PA,REF_MOE_PA,0.062463,0.079167,0.056425,0.952024
+full_184_days,POI categories,w/o Lag Gate,A1_no_lag_gate,0.107817,0.120593,0.102964,0.945660
+full_184_days,POI categories,w/o FiLM,A2_no_film,0.070792,0.083474,0.061026,0.941071
+full_184_days,POI categories,w/o L_ps,A3_no_lps,0.100665,0.112604,0.093686,0.943285
+full_184_days,POI categories,MoE only + PA,A4_moe_only,0.059099,0.071258,0.050818,0.949563
+full_184_days,Travel modes,UrbanShare,REF_BASE,0.021292,0.023922,0.020866,0.954233
+full_184_days,Travel modes,UrbanShare-MoE,REF_MOE_PA_supervised,0.013057,0.015428,0.011492,0.958128
+full_184_days,Travel modes,UrbanShare-MoE-PA,REF_MOE_PA,0.013878,0.020914,0.010050,0.934219
+full_184_days,Travel modes,w/o Lag Gate,A1_no_lag_gate,0.013408,0.017683,0.009387,0.941287
+full_184_days,Travel modes,w/o FiLM,A2_no_film,0.009816,0.012901,0.003754,0.929516
+full_184_days,Travel modes,w/o L_ps,A3_no_lps,0.013106,0.018674,0.008654,0.950683
+full_184_days,Travel modes,MoE only + PA,A4_moe_only,0.022268,0.039110,0.017659,0.838290
