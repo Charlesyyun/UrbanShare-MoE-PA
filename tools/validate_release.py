@@ -1,41 +1,38 @@
-"""Validate the public release tree without requiring private behavior inputs."""
+"""Validate the code-only public release."""
 from __future__ import annotations
 
 import ast
 import json
 import re
-import struct
 from pathlib import Path
 
-import pandas as pd
-
 ROOT = Path(__file__).resolve().parents[1]
-TEXT_EXTENSIONS = {".py", ".md", ".txt", ".json", ".csv", ".tex", ".sh", ".yml", ".yaml", ".toml", ".ini"}
+TEXT_EXTENSIONS = {".py", ".md", ".txt", ".json", ".tex", ".sh", ".yml", ".yaml", ".toml", ".ini"}
 REQUIRED = (
-    "README.md", "DATA.md", "LICENSE", "CONTRIBUTING.md",
-    "docs/ARCHITECTURE.md", "docs/WORKFLOW.md", "docs/PAPER_ALIGNMENT.md",
+    "README.md",
+    "DATA.md",
+    "LICENSE",
+    "CONTRIBUTING.md",
+    "docs/ARCHITECTURE.md",
+    "docs/WORKFLOW.md",
+    "docs/PAPER_ALIGNMENT.md",
     "daily_share_model.py",
-    "preference_dataset.py", "preference_alignment_finetune.py", "SEIR/seir_timeseries.py",
+    "build_enriched_timeshare.py",
+    "preference_dataset.py",
+    "preference_scorer.py",
+    "preference_alignment_finetune.py",
+    "SEIR/seir_timeseries.py",
+    "SEIR/calibration/auto_calibrate_seir.py",
+    "SEIR/analysis/run_10_seed_table9.py",
     "SEIR/analysis/plot_figure12_10seed.py",
-    "SEIR/results/policy_calendar_eta1_reproduction/provenance/calibration/best_effective_hazard_params.json",
-    "SEIR/results/policy_calendar_eta1_reproduction/random_seed_table9/table9_10_seed_summary.csv",
-    "SEIR/figures/fig15_seir_policy_compare_four_calendars_10seed.png",
 )
-PRIVATE_PATTERNS = (
+FORBIDDEN = (
     ("absolute Windows path", re.compile(r"[A-Za-z]:\\(?:Users|Study|Research)\\", re.I)),
     ("Linux private path", re.compile(r"/(?:root|home)/", re.I)),
     ("compute-environment name", re.compile(r"auto" + r"dl", re.I)),
     ("GitHub token", re.compile(r"gh" + r"_[pousr]_[A-Za-z0-9]{20,}")),
     ("private key", re.compile(r"BEGIN " + "PRIVATE KEY", re.I)),
 )
-
-
-def png_size(path: Path) -> tuple[int, int]:
-    with path.open("rb") as handle:
-        header = handle.read(24)
-    if len(header) != 24 or header[:8] != b"\x89PNG\r\n\x1a\n":
-        raise ValueError(f"invalid PNG: {path.relative_to(ROOT)}")
-    return struct.unpack(">II", header[16:24])
 
 
 def check_text(errors: list[str]) -> None:
@@ -48,7 +45,7 @@ def check_text(errors: list[str]) -> None:
         except UnicodeDecodeError as exc:
             errors.append(f"non-UTF-8 text file: {rel}: {exc}")
             continue
-        for label, pattern in PRIVATE_PATTERNS:
+        for label, pattern in FORBIDDEN:
             if pattern.search(text):
                 errors.append(f"{label} found in {rel}")
         if path.suffix.lower() == ".py":
@@ -66,47 +63,19 @@ def check_text(errors: list[str]) -> None:
 def check_structure(errors: list[str]) -> None:
     for rel in REQUIRED:
         if not (ROOT / rel).is_file():
-            errors.append(f"missing required release file: {rel}")
-    forbidden_suffixes = {".pt", ".pth", ".ckpt", ".safetensors", ".bin", ".csv.gz"}
-    forbidden = [p.relative_to(ROOT).as_posix() for p in ROOT.rglob("*") if p.is_file() and p.suffix.lower() in forbidden_suffixes]
-    if forbidden:
-        errors.append(f"private/large artifact files remain: {forbidden}")
+            errors.append(f"missing required code file: {rel}")
+    forbidden_names = {"baselines", "MoE-PA-ablations", "dataset", "results", "figures", "inputs"}
     for path in ROOT.rglob("*"):
-        if path.is_file() and path.stat().st_size >= 100 * 1024 * 1024:
-            errors.append(f"file exceeds GitHub 100 MiB limit: {path.relative_to(ROOT)}")
-
-
-def check_calendars(errors: list[str]) -> None:
-    for policy in ("early", "late", "short", "long"):
-        path = ROOT / policy / "calendar.csv"
-        if not path.is_file():
-            errors.append(f"missing calendar: {policy}")
-            continue
-        frame = pd.read_csv(path)
-        dates = pd.to_datetime(frame.get("date"), errors="coerce")
-        if len(frame) != 184 or dates.isna().any() or dates.iloc[0] != pd.Timestamp("2020-03-01") or dates.iloc[-1] != pd.Timestamp("2020-08-31") or dates.duplicated().any():
-            errors.append(f"invalid policy calendar: {policy}/calendar.csv")
-
-
-def check_results(errors: list[str]) -> None:
-    figure = ROOT / "SEIR" / "figures" / "fig15_seir_policy_compare_four_calendars_10seed.png"
-    if figure.is_file():
-        width, height = png_size(figure)
-        if width < 1000 or height < 500:
-            errors.append("ten-seed figure canvas is unexpectedly small")
-    table = ROOT / "SEIR" / "results" / "policy_calendar_eta1_reproduction" / "random_seed_table9" / "table9_10_seed_summary.csv"
-    if table.is_file() and len(pd.read_csv(table)) != 5:
-        errors.append("ten-seed Table 9 summary should contain five policy rows")
-    elif not table.is_file():
-        errors.append("ten-seed Table 9 summary is missing")
+        if path.is_dir() and path.name in forbidden_names:
+            errors.append(f"data/result directory remains: {path.relative_to(ROOT)}")
+        if path.is_file() and path.suffix.lower() in {".pt", ".pth", ".ckpt", ".safetensors", ".bin", ".csv", ".csv.gz"}:
+            errors.append(f"data/result file remains: {path.relative_to(ROOT)}")
 
 
 def main() -> None:
     errors: list[str] = []
     check_text(errors)
     check_structure(errors)
-    check_calendars(errors)
-    check_results(errors)
     result = {"status": "pass" if not errors else "fail", "errors": errors}
     print(json.dumps(result, indent=2, ensure_ascii=False))
     if errors:
@@ -115,6 +84,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
-
 

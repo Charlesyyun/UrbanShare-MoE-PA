@@ -1,36 +1,18 @@
 # Code workflow
 
-The repository has two reproducibility tracks.
+## Behavioral stage
 
-## Paper SEIR track
-
-This self-contained track is the recommended public entry point:
-
-```text
-ten-seed SEIR time series + calibrated parameters
-                    │
-                    ▼
-SEIR/results/policy_calendar_eta1_reproduction/run_10_seed_table9.py
-                    │
-                    ├──► Table 9 summary CSV/Markdown
-                    └──► SEIR/analysis/plot_figure12_10seed.py
-```
-
-The runner reads the retained 50 compact SEIR time series and the published
-economic proxy components. The release validator checks calendars, JSON and
-Python syntax, absence of private paths and model weights, required files,
-GitHub's file-size limit, and paper artifacts.
-
-## Full training track
-
-`
-1. `build_enriched_timeshare.py` converts restricted activity chains into daily features.
+1. `build_enriched_timeshare.py` converts authorized mobility inputs into daily features.
 2. `daily_share_model.py` trains UrbanShare-MoE.
-3. `preference_alignment_finetune.py` trains the preference scorer and aligns the policy.
-4. rolls checkpoints forward under a new calendar.
-5. `SEIR/seir_timeseries.py` maps behavior to epidemic states.
+3. `preference_alignment_finetune.py` trains the preference scorer and alignment objective.
+4. The resulting daily-share files are passed to the SEIR stage.
 
-The full track requires private inputs documented in `DATA.md`; they are
-protected by `.gitignore`. Run commands from the repository root. Packaged SEIR
-analysis paths are resolved from script locations and do not depend on the shell's directory.
+## SEIR stage
+
+1. Provide daily shares, feature metadata, hazard parameters, policy calendars, and the seed list locally.
+2. Run `SEIR/seir_timeseries.py` for individual simulations or `SEIR/analysis/run_10_seed_table9.py` for the ten-seed comparison.
+3. Run `SEIR/analysis/plot_figure12_10seed.py` to generate the paper-format policy figure.
+4. For parameter fitting, provide `official_curve.html` or pass `--official_curve_html` to `SEIR/calibration/auto_calibrate_seir.py`.
+
+All numerical outputs should be written outside the repository. The public tree contains only source code and documentation.
 

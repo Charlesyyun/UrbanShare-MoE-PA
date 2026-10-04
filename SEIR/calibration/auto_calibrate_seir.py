@@ -23,7 +23,8 @@ from seir_timeseries import SEIRTimeseries, _load_feature_meta
 ROOT = REPO_ROOT
 DEFAULT_DAILY_SHARES = REPO_ROOT / "data" / "behavior" / "observed.csv.gz"
 DEFAULT_FEATURE_META = REPO_ROOT / "data" / "behavior" / "feature_meta.json"
-OFFICIAL_CURVE_HTML = SEIR_ROOT / "inputs" / "official_curve.html"
+# The official curve is a user-supplied external input, not a repository file.
+OFFICIAL_CURVE_HTML = Path("official_curve.html")
 DEFAULT_BASE_HAZARD = REPO_ROOT / "dataset" / "MetaData" / "hazard_params.json"
 DEFAULT_OUT_DIR = SEIR_ROOT / "results" / "calibration_runs" / "latest"
 DEFAULT_SEED_LIST = DEFAULT_OUT_DIR / "seed_agents.csv"

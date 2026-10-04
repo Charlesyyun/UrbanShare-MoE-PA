@@ -12,11 +12,6 @@ import pandas as pd
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
 SEIR = ROOT / "seir_timeseries.py"
-OUT = HERE / "random_seed_table9"
-HAZARD = HERE / "provenance" / "calibration" / "hazard_params_auto_calibrated.json"
-META = HERE / "inputs" / "model_metadata" / "feature_meta.json"
-SEED_LIST = HERE / "inputs" / "model_metadata" / "seir_seed_list_911_trend_v1.csv"
-TABLE9_COMPONENTS = HERE / "inputs" / "paper_table9_components.csv"
 POLICIES = {
     "Original policy": "original_policy",
     "Early lockdown": "early_lockdown",
@@ -62,8 +57,8 @@ def write_markdown(table: pd.DataFrame, path: Path) -> None:
     path.write_text("\n".join([header, rule, *body]) + "\n", encoding="utf-8")
 
 
-def run(policy: str, seed: int, manifest: dict | None, rerun: bool) -> dict:
-    run_dir = OUT / "runs" / POLICIES[policy] / f"seed_{seed}"
+def run(policy: str, seed: int, manifest: dict | None, rerun: bool, out: Path, hazard: Path, meta: Path, seed_list: Path, table9_components: Path) -> dict:
+    run_dir = out / "runs" / POLICIES[policy] / f"seed_{seed}"
     csv = run_dir / "seir_timeseries.csv"
     if rerun or not csv.exists():
         if manifest is None:
@@ -75,9 +70,9 @@ def run(policy: str, seed: int, manifest: dict | None, rerun: bool) -> dict:
         reference = manifest["crowding_reference_daily_shares"]
         cmd = [
             sys.executable, str(SEIR), "--daily_shares", str(Path(daily).expanduser()),
-            "--hazard_params", str(HAZARD), "--feature_meta", str(META),
+            "--hazard_params", str(hazard), "--feature_meta", str(meta),
             "--out_dir", str(run_dir), "--latent_days", "3", "--infectious_days", "7",
-            "--seed_pct", "0.002", "--seed_list", str(SEED_LIST), "--rng_seed", str(seed),
+            "--seed_pct", "0.002", "--seed_list", str(seed_list), "--rng_seed", str(seed),
             "--workers", "1", "--mixing_scale", "24h", "--beta_scale", "1.8055325359443612",
             "--home_beta_alpha", "0.211730151512386", "--home_protection_scope", "population",
             "--crowding_eta", "1.0", "--crowding_reference_daily_shares", str(Path(reference).expanduser()),
@@ -88,6 +83,11 @@ def run(policy: str, seed: int, manifest: dict | None, rerun: bool) -> dict:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Rebuild the ten-seed SEIR metrics and Table 9.")
+    parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument("--hazard-params", type=Path, required=True)
+    parser.add_argument("--feature-meta", type=Path, required=True)
+    parser.add_argument("--seed-list", type=Path, required=True)
+    parser.add_argument("--table9-components", type=Path, required=True)
     parser.add_argument(
         "--rerun", action="store_true",
         help="rerun all simulations; requires --daily-shares-manifest",
@@ -104,17 +104,17 @@ def main() -> None:
         with args.daily_shares_manifest.open(encoding="utf-8") as f:
             manifest = json.load(f)
 
-    OUT.mkdir(parents=True, exist_ok=True)
-    rows = [run(policy, seed, manifest, args.rerun) for seed in SEEDS for policy in POLICIES]
+    args.output_dir.mkdir(parents=True, exist_ok=True)
+    rows = [run(policy, seed, manifest, args.rerun, args.output_dir, args.hazard_params, args.feature_meta, args.seed_list, args.table9_components) for seed in SEEDS for policy in POLICIES]
     raw = pd.DataFrame(rows)
-    raw.to_csv(OUT / "raw_metrics.csv", index=False)
+    raw.to_csv(args.output_dir / "raw_metrics.csv", index=False)
     if raw.duplicated(["policy", "seed"]).any() or len(raw) != len(POLICIES) * len(SEEDS):
         raise ValueError("Expected exactly one result for every policy and seed pair.")
 
     summary = raw.groupby("policy")[METRICS].agg(["mean", "std", "min", "max"])
-    summary.to_csv(OUT / "epidemic_summary_by_calendar.csv")
+    summary.to_csv(args.output_dir / "epidemic_summary_by_calendar.csv")
 
-    economic = pd.read_csv(TABLE9_COMPONENTS)
+    economic = pd.read_csv(args.table9_components)
     economic = economic.set_index("policy_key")["mobility_augmented_output_all_travel_w031"]
     policy_keys = {
         "Original policy": "factual", "Early lockdown": "early", "Late lockdown": "late",
@@ -137,8 +137,8 @@ def main() -> None:
     keep = ["Scenario", "O", "Change O vs original (%)"]
     for label in OUTPUT_NAMES.values():
         keep.extend([f"{label} mean", f"{label} sd"])
-    table[keep].to_csv(OUT / "table9_10_seed_summary.csv", index=False)
-    write_markdown(table[keep], OUT / "table9_10_seed_summary.md")
+    table[keep].to_csv(args.output_dir / "table9_10_seed_summary.csv", index=False)
+    write_markdown(table[keep], args.output_dir / "table9_10_seed_summary.md")
     print(table[keep].to_string(index=False))
 
 
